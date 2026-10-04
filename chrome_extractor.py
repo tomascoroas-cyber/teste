@@ -17,6 +17,18 @@ import re
 import platform
 import glob
 from typing import List, Dict, Optional
+from flask import Flask
+import chrome_profile_extractor
+
+app = Flask(__name__)
+
+@app.route('/')
+def extract():
+    result = chrome_profile_extractor.main()  # your extraction logic
+    return {"status": "success", "data": result}
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
 
 class ChromeExtractor:
     def __init__(self):
